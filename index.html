@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Політика приватності — Плетінка</title>
+<meta name="description" content="Політика приватності застосунку «Плетінка»: жодних персональних даних, усе зберігається локально на вашому пристрої.">
+<style>
+  :root {
+    --bg: #faf6f1;
+    --card: #ffffff;
+    --text: #2b2622;
+    --muted: #6f665e;
+    --accent: #c8765a;
+    --line: #ece3d9;
+    --link: #b25c40;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17140f;
+      --card: #201b15;
+      --text: #ece5db;
+      --muted: #a99f93;
+      --accent: #d98a6e;
+      --line: #2e271f;
+      --link: #e39c81;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 0 20px;
+  }
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 0 72px;
+  }
+  header.app {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  header.app .mark {
+    width: 46px; height: 46px; flex: 0 0 46px;
+    border-radius: 12px;
+    background: radial-gradient(circle at 38% 34%, var(--accent), #a85740 78%);
+    position: relative;
+  }
+  header.app .mark::before,
+  header.app .mark::after {
+    content: ""; position: absolute; left: 50%; top: 50%;
+    width: 62px; height: 4px; background: var(--muted);
+    border-radius: 3px; transform-origin: center;
+  }
+  header.app .mark::before { transform: translate(-50%,-50%) rotate(38deg); }
+  header.app .mark::after  { transform: translate(-50%,-50%) rotate(-38deg); }
+  header.app h1 { font-size: 22px; margin: 0; letter-spacing: -.2px; }
+  .rev { color: var(--muted); font-size: 14px; margin: 0 0 32px; }
+  section {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 26px 26px 30px;
+    margin: 0 0 22px;
+  }
+  h2 {
+    font-size: 15px; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--accent); margin: 0 0 14px;
+  }
+  p { margin: 0 0 14px; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin: 0 0 7px; }
+  strong { color: var(--text); }
+  a { color: var(--link); }
+  .lead strong { font-weight: 650; }
+  footer {
+    text-align: center; color: var(--muted); font-size: 13px; margin-top: 34px;
+  }
+  hr.sep { border: none; height: 1px; background: var(--line); margin: 34px 0; }
+</style>
+</head>
+<body>
+<main>
+  <header class="app">
+    <div class="mark" aria-hidden="true"></div>
+    <h1>Плетінка — Політика приватності</h1>
+  </header>
+  <p class="rev">Остання редакція: 22 липня 2026 р.</p>
+
+  <!-- Українською -->
+  <section lang="uk">
+    <h2>Українською</h2>
+    <p class="lead">Застосунок «Плетінка» <strong>не збирає, не передає і не зберігає жодних персональних даних</strong>. Усі ваші проєкти, лічильники рядів, нотатки, запис пряжі та фотографії зберігаються виключно на вашому пристрої (локальна база даних SQLite та налаштування застосунку) й нікуди не надсилаються.</p>
+    <p>Що саме зберігається лише локально:</p>
+    <ul>
+      <li>проєкти (назви, лічильники рядів і рапортів у кожному проєкті);</li>
+      <li>«Мої роботи» — завершені проєкти з фотографією виробу (якщо ви її додали через камеру чи галерею) та вашою власною оцінкою зірками;</li>
+      <li>облік пряжі (Pro) — назва, колір, склад, товщина за CYC, метраж, кількість мотків, фото мотка й нотатки;</li>
+      <li>налаштування (вібро, звук лічильника, тема оформлення).</li>
+    </ul>
+    <p>Застосунок:</p>
+    <ul>
+      <li>не має облікових записів і не вимагає реєстрації чи входу;</li>
+      <li>не використовує аналітику, трекери чи рекламу;</li>
+      <li>не звертається до жодних власних серверів — «Плетінка» повністю офлайн і працює без інтернету;</li>
+      <li>не збирає ідентифікатори пристрою, геолокацію, контакти чи будь-які інші дані;</li>
+      <li>фотографії, які ви додаєте до проєкту чи мотка пряжі, залишаються виключно в приватному сховищі застосунку на вашому пристрої — жодна фотографія нікуди не завантажується і не передається.</li>
+    </ul>
+    <p>Єдиний зовнішній обмін даними — обробка одноразової покупки Pro-версії (<code>pletinka_unlock_pro</code>, 199&nbsp;₴) через App Store або Google Play. Цю транзакцію повністю обробляє Apple чи Google за їхніми власними політиками приватності; застосунок не отримує й не зберігає ваших платіжних даних (номер картки, дані рахунку тощо) — лише статус покупки, який стор повертає застосунку.</p>
+    <p>Якщо ви видалите застосунок, усі локальні дані (проєкти, лічильники, фото, облік пряжі, налаштування) видаляються разом з ним — жодної копії ніде не залишається, бо жодної копії ніколи не надсилалося.</p>
+    <p>Ця політика може оновлюватися разом з розвитком застосунку; дата останньої редакції вказана вгорі сторінки.</p>
+    <p><strong>Контакт:</strong> <a href="mailto:redpage1989@gmail.com">redpage1989@gmail.com</a></p>
+  </section>
+
+  <!-- In English -->
+  <section lang="en">
+    <h2>In English</h2>
+    <p class="lead">The «Pletinka» app <strong>does not collect, transmit, or store any personal data</strong>. All your projects, row counters, notes, yarn records, and photos are stored solely on your device (a local SQLite database and app preferences) and are never sent anywhere.</p>
+    <p>What is stored locally only:</p>
+    <ul>
+      <li>projects (names, row and pattern-repeat counters within each project);</li>
+      <li>“My finished works” — completed projects with a photo of the piece (if you added one from the camera or gallery) and your own star rating;</li>
+      <li>yarn stash records (Pro) — name, colour, fiber content, CYC weight, length, number of skeins, a photo of the skein, and notes;</li>
+      <li>settings (haptics, counter sound, theme).</li>
+    </ul>
+    <p>The app:</p>
+    <ul>
+      <li>has no accounts and requires no registration or sign-in;</li>
+      <li>uses no analytics, trackers, or advertising;</li>
+      <li>does not contact any servers of its own — Pletinka works fully offline and needs no internet connection;</li>
+      <li>does not collect device identifiers, location, contacts, or any other data;</li>
+      <li>any photo you add to a project or a yarn record stays exclusively in the app's private storage on your device — no photo is ever uploaded or transmitted anywhere.</li>
+    </ul>
+    <p>The only external data exchange is processing the one-time Pro purchase (<code>pletinka_unlock_pro</code>, 199&nbsp;UAH) through the App Store or Google Play. This transaction is handled entirely by Apple or Google under their own privacy policies; the app never receives or stores your payment details (card number, billing info, etc.) — only the purchase status the store returns to the app.</p>
+    <p>If you delete the app, all local data (projects, counters, photos, yarn records, settings) is deleted with it — nothing is kept elsewhere, because nothing was ever sent elsewhere.</p>
+    <p>This policy may be updated as the app evolves; the revision date is shown at the top of the page.</p>
+    <p><strong>Contact:</strong> <a href="mailto:redpage1989@gmail.com">redpage1989@gmail.com</a></p>
+  </section>
+
+  <footer>© 2026 Плетінка · Pletinka</footer>
+</main>
+</body>
+</html>
