@@ -1,0 +1,5 @@
+
+# Граф коду graphify — регенерується через `graphify update .`
+graphify-out/
+# Робочі копії агентів
+.claude/worktrees/
