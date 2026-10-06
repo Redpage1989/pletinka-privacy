@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Прототип застосунку стоматклініки</title>
+<style>
+:root{
+  --teal:#0f9d94; --teal-d:#0b7a73; --teal-l:#e3f6f4; --ink:#14292b; --mute:#6b8083;
+  --line:#e4eced; --bg:#f4f8f8; --card:#fff; --ok:#2e9e5b; --warn:#e8a33d;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:#dfeceb;
+  display:flex;align-items:center;justify-content:center;gap:40px;padding:16px}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+
+/* Демо-панель (тільки для запису екрана на десктопі) */
+.demo{width:230px;background:#fff;border-radius:16px;padding:16px;box-shadow:0 6px 24px #0001;font-size:14px}
+.demo h2{font-size:15px;margin-bottom:4px}
+.demo p{color:var(--mute);font-size:12px;margin-bottom:12px;line-height:1.4}
+.demo button{display:block;width:100%;padding:10px;margin-top:8px;border-radius:10px;background:var(--teal-l);color:var(--teal-d);font-weight:600}
+.demo button.ghost{background:#f1f1f1;color:#555}
+.demo small{display:block;margin-top:12px;color:var(--mute);font-size:11px;line-height:1.4}
+
+/* Телефон */
+.phone{width:390px;height:800px;max-height:calc(100vh - 32px);background:var(--bg);border-radius:38px;
+  border:10px solid #101b1c;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 18px 50px #0003}
+.status{height:30px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 22px;font-size:12px;font-weight:600;background:#fff}
+.app{flex:1;overflow-y:auto;padding-bottom:12px}
+header.top{background:#fff;padding:10px 18px 14px;border-bottom:1px solid var(--line)}
+header.top .brand{display:flex;align-items:center;gap:10px}
+.logo{width:34px;height:34px;border-radius:10px;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:800}
+header.top b{display:block;font-size:16px}
+header.top span{font-size:12px;color:var(--mute)}
+.pad{padding:16px 18px}
+h1{font-size:20px;margin-bottom:4px}
+.sub{color:var(--mute);font-size:13px;margin-bottom:14px}
+.card{background:var(--card);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px #0000000d}
+.row{display:flex;align-items:center;gap:12px}
+.grow{flex:1;min-width:0}
+.avatar{width:46px;height:46px;border-radius:50%;background:var(--teal-l);color:var(--teal-d);display:grid;place-items:center;font-weight:700;flex:none}
+.muted{color:var(--mute);font-size:13px}
+.btn{display:block;width:100%;background:var(--teal);color:#fff;padding:14px;border-radius:14px;font-weight:700;text-align:center;font-size:16px;min-height:48px}
+.btn:disabled{background:#b9cfcd}
+.btn.sec{background:var(--teal-l);color:var(--teal-d)}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;background:var(--teal-l);color:var(--teal-d)}
+.pill.ok{background:#e2f5e9;color:var(--ok)} .pill.warn{background:#fdf1dc;color:#a8691a}
+
+.hero{background:linear-gradient(135deg,var(--teal),#13b5aa);color:#fff;border-radius:18px;padding:16px;margin-bottom:12px}
+.hero .muted{color:#ffffffcc}
+.hero .big{font-size:20px;font-weight:800;margin:4px 0}
+.hero .btn{background:#fff;color:var(--teal-d);margin-top:12px;padding:11px;min-height:44px}
+
+.doc{cursor:pointer;border:2px solid transparent}
+.doc.sel{border-color:var(--teal);background:var(--teal-l)}
+.days{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:10px}
+.day{flex:none;width:56px;padding:8px 0;border-radius:12px;background:#fff;text-align:center;border:2px solid transparent}
+.day small{display:block;color:var(--mute);font-size:11px}
+.day b{font-size:17px}
+.day.sel{border-color:var(--teal);background:var(--teal-l)}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.slot{padding:12px 0;border-radius:12px;background:#fff;text-align:center;font-weight:600;border:2px solid transparent;min-height:44px}
+.slot.sel{border-color:var(--teal);background:var(--teal-l);color:var(--teal-d)}
+.slot:disabled{opacity:.35;text-decoration:line-through}
+.steps{display:flex;gap:6px;margin-bottom:14px}
+.steps i{flex:1;height:5px;border-radius:9px;background:#cfdcdc}
+.steps i.on{background:var(--teal)}
+.back{color:var(--teal-d);font-weight:600;font-size:14px;margin-bottom:10px;min-height:32px}
+.sum dt{color:var(--mute);font-size:12px;margin-top:10px}
+.sum dd{font-weight:600}
+.done{text-align:center;padding:30px 10px}
+.check{width:72px;height:72px;border-radius:50%;background:var(--ok);color:#fff;font-size:38px;display:grid;place-items:center;margin:0 auto 14px;animation:pop .4s}
+@keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+
+.tl{position:relative;margin-left:8px;border-left:2px solid var(--line);padding-left:16px}
+.tl .item{position:relative;margin-bottom:14px}
+.tl .item:before{content:"";position:absolute;left:-23px;top:14px;width:12px;height:12px;border-radius:50%;background:var(--teal);border:2px solid var(--bg)}
+.bar{height:8px;border-radius:9px;background:#dde8e8;overflow:hidden;margin:8px 0 4px}
+.bar i{display:block;height:100%;background:var(--teal);border-radius:9px}
+.rec li{margin:6px 0 0 18px;font-size:14px}
+
+nav.tabs{flex:none;display:flex;background:#fff;border-top:1px solid var(--line);padding-bottom:6px}
+nav.tabs button{flex:1;padding:9px 0 6px;font-size:11px;color:var(--mute);display:flex;flex-direction:column;align-items:center;gap:2px;min-height:54px}
+nav.tabs button span{font-size:20px}
+nav.tabs button.on{color:var(--teal-d);font-weight:700}
+
+/* Пуш-нагадування */
+.push{position:absolute;left:10px;right:10px;top:-120px;background:#ffffffee;backdrop-filter:blur(8px);border-radius:18px;padding:12px;
+  box-shadow:0 8px 30px #0003;transition:top .45s cubic-bezier(.2,.9,.3,1.1);z-index:10;display:flex;gap:10px}
+.push.show{top:38px}
+.push .logo{width:38px;height:38px}
+.push b{font-size:13px} .push p{font-size:13px;margin-top:2px;line-height:1.35}
+.push small{color:var(--mute);font-size:11px;margin-left:auto;flex:none}
+
+@media (max-width:760px){
+  body{padding:0;display:block;background:var(--bg)}
+  .demo{display:none}
+  .phone{width:100%;height:100dvh;max-height:none;border:0;border-radius:0;box-shadow:none}
+  .status{display:none}
+  .push.show{top:10px}
+}
+</style>
+</head>
+<body>
+
+<aside class="demo" aria-label="Демо-керування">
+  <h2>Демо-режим</h2>
+  <p>Прототип для запису екрана. Дані вигадані. Панель не потрапляє в кадр, якщо записувати лише телефон.</p>
+  <button id="d-push">🔔 Показати нагадування (N)</button>
+  <button class="ghost" id="d-reset">↺ Скинути (R)</button>
+  <small>Сценарій: Запис → лікар → дата й час → підтвердити → Головна → нагадування → Історія.</small>
+</aside>
+
+<main class="phone" id="phone">
+  <div class="status"><span id="clock">9:41</span><span>5G ▮▮▮</span></div>
+
+  <div class="push" id="push" role="status" aria-live="polite">
+    <div class="logo">Д</div>
+    <div class="grow"><b>[КЛІНІКА]</b><p id="push-text"></p></div>
+    <small>зараз</small>
+  </div>
+
+  <div class="app" id="app"></div>
+
+  <nav class="tabs" id="tabs">
+    <button data-tab="home"><span>🏠</span>Головна</button>
+    <button data-tab="book"><span>📅</span>Запис</button>
+    <button data-tab="history"><span>🦷</span>Історія</button>
+  </nav>
+</main>
+
+<script>
+(function(){
+  /* ДЕМО-ДАНІ — вигадані. Замінити реальними з API клініки. */
+  var DOCTORS=[
+    {id:1,name:"Іван Мельник",role:"Стоматолог-терапевт",ini:"ІМ",exp:"12 років досвіду"},
+    {id:2,name:"Олена Коваль",role:"Ортодонт",ini:"ОК",exp:"9 років досвіду"},
+    {id:3,name:"Андрій Шевченко",role:"Хірург-імплантолог",ini:"АШ",exp:"15 років досвіду"}
+  ];
+  var BUSY={1:["10:00","12:30"],2:["09:00","11:30","15:00"],3:["10:30","14:00"]};
+  var TIMES=["09:00","09:30","10:00","10:30","11:30","12:30","14:00","15:00","16:30"];
+  var WD=["нд","пн","вт","ср","чт","пт","сб"];
+  var MON=["січня","лютого","березня","квітня","травня","червня","липня","серпня","вересня","жовтня","листопада","грудня"];
+  var HISTORY=[
+    {d:"12 вер 2026",t:"Професійна гігієна",doc:"Іван Мельник",n:"Видалено наліт і зубний камінь. Покриття фторлаком."},
+    {d:"20 тра 2026",t:"Лікування карієсу (зуб 36)",doc:"Іван Мельник",n:"Пломба, світлополімерний композит. Гарантія 12 міс."},
+    {d:"03 лют 2026",t:"Консультація й огляд",doc:"Олена Коваль",n:"Складено план лікування, зроблено панорамний знімок."}
+  ];
+
+  var S={tab:"home",step:1,doc:null,date:null,time:null,booked:null};
+  var app=document.getElementById("app");
+
+  function load(){try{var v=JSON.parse(localStorage.getItem("dental-proto")||"null");if(v&&v.booked)S.booked=v.booked}catch(e){}}
+  function save(){try{localStorage.setItem("dental-proto",JSON.stringify({booked:S.booked}))}catch(e){}}
+
+  function days(){var a=[],n=new Date();for(var i=1;i<=10;i++){var d=new Date(n.getFullYear(),n.getMonth(),n.getDate()+i);if(d.getDay()!==0)a.push(d)}return a.slice(0,7)}
+  function key(d){return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()}
+  function fmt(d){return WD[d.getDay()]+", "+d.getDate()+" "+MON[d.getMonth()]}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  function docById(id){return DOCTORS.filter(function(x){return x.id===id})[0]}
+  function busy(docId,d,t){var seed=(d.getDate()+docId)%3;return (BUSY[docId]||[]).indexOf(t)>-1||(seed===0&&t==="14:00")}
+
+  function head(){return '<header class="top"><div class="brand"><div class="logo">Д</div><div><b>[КЛІНІКА]</b><span>Ваша посмішка — наш пріоритет</span></div></div></header>'}
+
+  function home(){
+    var h=head()+'<div class="pad"><h1>Вітаємо, Олено 👋</h1><p class="sub">Усе про ваше лікування — в одному місці</p>';
+    if(S.booked){
+      var b=S.booked;
+      h+='<div class="hero"><span class="muted">Найближчий візит</span><div class="big">'+esc(b.dateText)+', '+esc(b.time)+'</div><div>'+esc(b.doc)+' · '+esc(b.role)+'</div><button class="btn" data-go="history">Підготуватись до візиту</button></div>';
+    } else {
+      h+='<div class="hero"><span class="muted">Найближчий візит</span><div class="big">Немає запису</div><div>Оберіть лікаря й зручний час</div><button class="btn" data-go="book">Записатись на прийом</button></div>';
+    }
+    h+='<div class="card"><div class="row"><div class="avatar">🪥</div><div class="grow"><b>Наступна гігієна</b><div class="muted">Рекомендовано раз на 6 місяців — до березня 2027</div></div></div></div>';
+    h+='<div class="card"><div class="row"><div class="avatar">🎁</div><div class="grow"><b>Бонуси: 320 ₴</b><div class="muted">Можна використати при наступній оплаті</div></div></div></div></div>';
+    return h;
+  }
+
+  function book(){
+    var h=head()+'<div class="pad">';
+    if(S.step===4){
+      var b=S.booked;
+      return h+'<div class="done"><div class="check">✓</div><h1>Ви записані!</h1><p class="sub">'+esc(b.dateText)+', '+esc(b.time)+'<br>'+esc(b.doc)+'<br>Нагадаємо за добу та за 2 години</p><button class="btn" data-go="home">На головну</button></div></div>';
+    }
+    h+='<div class="steps"><i class="on"></i><i class="'+(S.step>=2?'on':'')+'"></i><i class="'+(S.step>=3?'on':'')+'"></i></div>';
+    if(S.step>1)h+='<button class="back" data-back>← Назад</button>';
+    if(S.step===1){
+      h+='<h1>Оберіть лікаря</h1><p class="sub">Крок 1 з 3</p>';
+      DOCTORS.forEach(function(d){
+        h+='<button class="card doc row'+(S.doc===d.id?' sel':'')+'" data-doc="'+d.id+'" style="width:100%;text-align:left"><div class="avatar">'+d.ini+'</div><div class="grow"><b>'+d.name+'</b><div class="muted">'+d.role+' · '+d.exp+'</div></div></button>';
+      });
+      h+='<button class="btn" data-next '+(S.doc?'':'disabled')+'>Далі</button>';
+    }
+    if(S.step===2){
+      h+='<h1>Дата й час</h1><p class="sub">Крок 2 з 3 · '+esc(docById(S.doc).name)+'</p><div class="days">';
+      days().forEach(function(d){h+='<button class="day'+(S.date===key(d)?' sel':'')+'" data-date="'+key(d)+'"><small>'+WD[d.getDay()]+'</small><b>'+d.getDate()+'</b></button>'});
+      h+='</div>';
+      if(S.date){
+        var dd=days().filter(function(d){return key(d)===S.date})[0];
+        h+='<div class="slots">';
+        TIMES.forEach(function(t){h+='<button class="slot'+(S.time===t?' sel':'')+'" data-time="'+t+'"'+(busy(S.doc,dd,t)?' disabled':'')+'>'+t+'</button>'});
+        h+='</div>';
+      } else h+='<p class="muted" style="margin-bottom:14px">Оберіть день, щоб побачити вільний час</p>';
+      h+='<button class="btn" data-next '+(S.date&&S.time?'':'disabled')+'>Далі</button>';
+    }
+    if(S.step===3){
+      var d3=days().filter(function(d){return key(d)===S.date})[0],doc=docById(S.doc);
+      h+='<h1>Підтвердження</h1><p class="sub">Крок 3 з 3</p><div class="card"><dl class="sum"><dt>Лікар</dt><dd>'+doc.name+' · '+doc.role+'</dd><dt>Дата</dt><dd>'+fmt(d3)+'</dd><dt>Час</dt><dd>'+S.time+'</dd><dt>Адреса</dt><dd>[Адреса клініки]</dd></dl></div><button class="btn" data-confirm>Підтвердити запис</button>';
+    }
+    return h+'</div>';
+  }
+
+  function history(){
+    var h=head()+'<div class="pad"><h1>Історія лікування</h1><p class="sub">Візити, рекомендації та план</p>';
+    h+='<div class="card"><b>План лікування</b><div class="muted">Етап 2 з 3 · Відновлення зубів</div><div class="bar"><i style="width:66%"></i></div><span class="pill">66% виконано</span></div>';
+    h+='<div class="card rec"><b>Рекомендації лікаря</b><ul><li>Чистити зуби двічі на день, 2 хвилини</li><li>Користуватись зубною ниткою щовечора</li><li>Уникати дуже твердої їжі 24 години після візиту</li></ul></div>';
+    h+='<h1 style="font-size:16px;margin:16px 0 10px">Візити</h1><div class="tl">';
+    HISTORY.forEach(function(v){h+='<div class="item card"><span class="pill ok">'+v.d+'</span><div style="margin-top:6px"><b>'+v.t+'</b></div><div class="muted">'+v.doc+'</div><div style="font-size:14px;margin-top:4px">'+v.n+'</div></div>'});
+    return h+'</div></div>';
+  }
+
+  function render(){
+    var html=S.tab==="home"?home():S.tab==="book"?book():history();
+    app.innerHTML=html;app.scrollTop=0;
+    Array.prototype.forEach.call(document.querySelectorAll("#tabs button"),function(b){b.classList.toggle("on",b.dataset.tab===S.tab)});
+  }
+  function goTab(t){S.tab=t;if(t==="book"&&S.step===4){resetBook()}render()}
+  function resetBook(){S.step=1;S.doc=null;S.date=null;S.time=null}
+
+  document.getElementById("tabs").addEventListener("click",function(e){var b=e.target.closest("button");if(b)goTab(b.dataset.tab)});
+  app.addEventListener("click",function(e){
+    var t=e.target.closest("button");if(!t||t.disabled)return;
+    if(t.dataset.go){goTab(t.dataset.go);return}
+    if(t.dataset.doc){S.doc=+t.dataset.doc;render();return}
+    if(t.dataset.date){S.date=t.dataset.date;S.time=null;render();return}
+    if(t.dataset.time){S.time=t.dataset.time;render();return}
+    if("next" in t.dataset){S.step++;render();return}
+    if("back" in t.dataset){S.step--;render();return}
+    if("confirm" in t.dataset){
+      var d=days().filter(function(x){return key(x)===S.date})[0],doc=docById(S.doc);
+      S.booked={doc:doc.name,role:doc.role,time:S.time,dateText:fmt(d)};save();S.step=4;render();
+    }
+  });
+
+  var pushEl=document.getElementById("push"),pushTimer;
+  function showPush(){
+    var b=S.booked,txt=b?"Нагадування: завтра о "+b.time+" візит до лікаря "+b.doc+". Чекаємо на вас!":"Нагадування: час запланувати гігієну зубів. Оберіть зручний час у застосунку.";
+    document.getElementById("push-text").textContent=txt;
+    pushEl.classList.add("show");clearTimeout(pushTimer);pushTimer=setTimeout(function(){pushEl.classList.remove("show")},4500);
+  }
+  function resetAll(){S.booked=null;resetBook();S.tab="home";try{localStorage.removeItem("dental-proto")}catch(e){}pushEl.classList.remove("show");render()}
+  document.getElementById("d-push").onclick=showPush;
+  document.getElementById("d-reset").onclick=resetAll;
+  pushEl.onclick=function(){pushEl.classList.remove("show");goTab("home")};
+  document.addEventListener("keydown",function(e){if(e.target.tagName==="INPUT")return;if(e.key==="n"||e.key==="N")showPush();if(e.key==="r"||e.key==="R")resetAll()});
+
+  load();render();
+})();
+</script>
+</body>
+</html>
