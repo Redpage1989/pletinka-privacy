@@ -9,7 +9,7 @@ mkdirSync(OUT, { recursive: true });
 
 const b = await chromium.launch();
 const p = await b.newPage({ viewport: { width: 1920, height: 1080 } });
-for (const m of ['intro', 'bg0b', 'bg0c', 'bg3', 'bg4', 'bg5', 'frame', 'title', 'end', 'crm']) {
+for (const m of ['intro', 'bg0b', 'bg0c', 'bg3', 'bg4', 'bg5', 'bgvisit', 'bgmemo', 'bgplan', 'frame', 'title', 'end', 'crm']) {
   await p.goto(`${SRC}#${m}`); await p.reload(); // hash-навігація без reload не перезапускає скрипт
   await p.waitForLoadState('networkidle'); await p.evaluate(() => document.fonts.ready);
   await p.screenshot({ path: `${OUT}${m}.png`, omitBackground: true });

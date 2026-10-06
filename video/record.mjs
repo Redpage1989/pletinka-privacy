@@ -67,27 +67,21 @@ await scene('scene0c', BOOKED, async ({ p, w, tap }) => {
   await w(700); await tap('#app [data-go="loyalty"]'); await w(4500);
 });
 
-// Сцена 3: запис на прийом за три кроки
-await scene('scene3', null, async ({ p, w, tap }) => {
-  await w(1200); await tap('#app [data-go="book"]');
-  await w(900); await tap('[data-doc="1"]');
-  await w(1100); await tap('.slot >> nth=2');
-  await w(700); await p.locator('#note').click(); await p.keyboard.type('Болить зуб праворуч', { delay: 45 });
-  await w(500); await tap('[data-confirm]');
-  await w(2600);
+// CJM 3: після рецепції — візит уже в застосунку, пуш «Завтра візит»
+await scene('visit', BOOKED, async ({ p, w }) => {
+  await w(2500); await p.keyboard.press('n'); await w(5000);
 });
 
-// Сцена 4: пуш «Завтра візит» → Догляд: памʼятка з галочками → «коли дзвонити терміново»
-await scene('scene4', BOOKED, async ({ p, w, tap, scroll }) => {
-  await w(1200); await p.keyboard.press('n');
-  await w(3200); await tap('#tabs [data-tab="care"]');
-  await w(1200); await tap('[data-memo="5"]');
-  await w(800); await scroll('.urgent', 1800);
-  await w(800);
+// CJM 5: вдома — памʼятка з галочками → «коли дзвонити терміново»
+await scene('memo', BOOKED, async ({ p, w, tap, scroll }) => {
+  await w(600); await tap('#tabs [data-tab="care"]');
+  await w(1400); await tap('[data-memo="5"]');
+  await w(900); await scroll('.urgent', 1800);
+  await w(1200);
 });
 
-// Сцена 5: Лікування → формула → етапи → погодження плану
-await scene('scene5', BOOKED, async ({ p, w, tap, scroll }) => {
+// CJM 6: Лікування → формула → етапи → погодження плану
+await scene('plan', BOOKED, async ({ p, w, tap, scroll }) => {
   await w(600); await tap('#tabs [data-tab="plan"]');
   await w(1600); await scroll('.film', 1300);
   await scroll('.stage', 1300);
