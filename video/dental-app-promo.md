@@ -53,7 +53,8 @@ node make-assets.mjs                # тло, рамка телефона, ти�
 python3 ~/.claude/skills/elevenlabs-tts/tts.py озвучка-elevenlabs.txt --scenes -o work/vo/
 ./build.sh                          # → work/im-clinic-promo.mp4 + .srt
 ```
-Сцени й таймінг — масиви `DUR`/`VO` у `build.sh`. Музики немає: додати ліцензійну (YouTube Audio Library) у монтажі на −20…−24 dB під голос.
+Сцени й таймінг — масиви `DUR`/`VO` у `build.sh`. Музика — ElevenLabs Music (інструментал 57 с, промпт нижче), `work/music/bed.mp3`; `build.sh` кладе її під голос на 12–15 dB тихше й притишує на фразах. Ліцензія на комерційне використання — лише на платному тарифі ElevenLabs, перевірити.
+Промпт: `Calm, warm, modern corporate background music for a healthcare app commercial. Soft felt piano, light plucked guitar, gentle airy pads, subtle soft percussion entering after 10 seconds, uplifting and reassuring, 90 BPM, major key. Instrumental only.`
 YouTube: назва, опис з посиланнями на im.pl.ua/clinic і демо clinic-demo.im.pl.ua, субтитри `im-clinic-promo.srt`, мініатюра.
 
 ## Згода й права

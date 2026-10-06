@@ -49,5 +49,15 @@ done
 ffmpeg -v error -y "${inputs[@]}" -filter_complex \
   "${mix}$(printf '[a%d]' {0..7})amix=inputs=8:normalize=0,apad,atrim=duration=$t,loudnorm=I=-11.7:TP=-1.5:LRA=11[a]" \
   -map "[a]" -c:a aac -b:a 192k -ar 48000 $W/voice.m4a
-ffmpeg -v error -y -i $W/video-only.mp4 -i $W/voice.m4a -c:v copy -c:a copy -shortest -movflags +faststart $W/im-clinic-promo.mp4
+# Музика (work/music/bed.mp3, ElevenLabs Music) — під голосом, притишується на фразах (sidechain)
+A=$W/voice.m4a
+if [ -f $W/music/bed.mp3 ]; then
+  ffmpeg -v error -y -i $W/voice.m4a -i $W/music/bed.mp3 -filter_complex \
+    "[0:a]asplit[v][key];[1:a]atrim=duration=$t,volume=-12dB,afade=in:d=1.5,afade=out:st=$(python3 -c "print($t-2.5)"):d=2.5[m];\
+     [m][key]sidechaincompress=threshold=0.03:ratio=6:attack=40:release=500[md];\
+     [v][md]amix=inputs=2:normalize=0,alimiter=limit=0.8:level=disabled[a]" \
+    -map "[a]" -c:a aac -b:a 192k -ar 48000 $W/mix.m4a
+  A=$W/mix.m4a
+fi
+ffmpeg -v error -y -i $W/video-only.mp4 -i $A -c:v copy -c:a copy -shortest -movflags +faststart $W/im-clinic-promo.mp4
 echo "готово: $W/im-clinic-promo.mp4 ($t с) і $srt"
