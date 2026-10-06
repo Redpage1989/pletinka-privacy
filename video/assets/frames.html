@@ -12,7 +12,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:1920px;height:1080px;background:transparent;font-family:Geologica,Arial,sans-serif;color:var(--ink)}
 section{display:none;width:1920px;height:1080px;position:relative;overflow:hidden}
-body[data-m^="bg"] #bg,body[data-m="frame"] #frame,body[data-m="title"] #title,body[data-m="end"] #end,body[data-m="intro"] #intro{display:block}
+body[data-m^="bg"] #bg,body[data-m="frame"] #frame,body[data-m="title"] #title,body[data-m="end"] #end,body[data-m="intro"] #intro,body[data-m="crm"] #crm{display:block}
 
 /* Тло екранних сцен: телефон зліва (екран 462×1000 від x=300,y=40), текст справа */
 #bg{background:radial-gradient(1200px 900px at 20% 30%,#fff 0,var(--soft) 55%,#d5deec 100%)}
@@ -36,14 +36,14 @@ body[data-m^="bg"] #bg,body[data-m="frame"] #frame,body[data-m="title"] #title,b
 
 /* Кінцева заставка — у мові сайту IM: темне тло, Unbounded, бурштиновий акцент */
 #end{background:radial-gradient(1100px 800px at 75% 20%,#12304f 0,var(--night) 60%);color:var(--paper)}
-#end .l{position:absolute;left:150px;top:250px;width:1000px}
+#end .l{position:absolute;left:150px;top:150px;width:1000px}
 #end .mark{display:flex;align-items:center;gap:22px;margin-bottom:46px}
 #end .mark img{width:96px;height:96px}
 #end .mark span{font-family:Unbounded,Geologica,sans-serif;font-size:34px;font-weight:600;color:#8FA8B2}
 #end h1{font-family:Unbounded,Geologica,sans-serif;font-size:118px;line-height:1;font-weight:700;letter-spacing:-.02em}
 #end p{margin-top:30px;font-size:40px;line-height:1.3;color:#B9CBD2;width:900px}
 #end .url{margin-top:54px;display:inline-block;font-size:44px;font-weight:600;color:var(--night);background:var(--amber);padding:14px 30px;border-radius:18px}
-#end .qr{position:absolute;right:170px;top:300px;background:#fff;padding:30px;border-radius:32px}
+#end .qr{position:absolute;right:170px;top:200px;background:#fff;padding:30px;border-radius:32px}
 #intro{background:radial-gradient(1100px 800px at 75% 20%,#12304f 0,var(--night) 60%);color:var(--paper)}
 #intro .l{position:absolute;left:150px;top:300px;width:1500px}
 #intro .mark{display:flex;align-items:center;gap:22px;margin-bottom:50px}
@@ -52,6 +52,13 @@ body[data-m^="bg"] #bg,body[data-m="frame"] #frame,body[data-m="title"] #title,b
 #intro h1{font-family:Unbounded,Geologica,sans-serif;font-size:150px;line-height:1;font-weight:700;letter-spacing:-.02em}
 #intro p{margin-top:36px;font-size:46px;line-height:1.3;color:#B9CBD2}
 #intro p b{color:var(--amber);font-weight:600}
+/* Шар поверх заставки: блок для клінік, проявляється під фразу про CRM */
+#crm .card{position:absolute;left:150px;right:170px;top:820px;display:flex;align-items:center;gap:30px;padding:30px 40px;border-radius:28px;background:rgba(234,242,242,.08);border:1px solid rgba(234,242,242,.16);color:var(--paper)}
+#crm .ic{flex:none;width:72px;height:72px;border-radius:20px;background:var(--amber);display:grid;place-items:center}
+#crm .ic svg{width:40px;height:40px}
+#crm b{display:block;font-size:40px;font-weight:600}
+#crm span{display:block;margin-top:6px;font-size:30px;color:#B9CBD2}
+#crm em{font-style:normal;color:var(--amber)}
 #end .qr small{display:block;text-align:center;margin-top:16px;font-size:24px;color:var(--night);font-weight:600}
 </style>
 </head>
@@ -69,6 +76,11 @@ body[data-m^="bg"] #bg,body[data-m="frame"] #frame,body[data-m="title"] #title,b
   <div class="mark"><img src="im-logo.svg" alt="">im.pl.ua</div>
   <h1>Вітаємо!</h1>
   <p>Ми — <b>IM</b>, розробляємо програмне забезпечення.<br>Представляємо застосунок для пацієнтів вашої клініки.</p>
+</div></section>
+
+<section id="crm"><div class="card">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0A151D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+  <div><b>Для клінік: адмінка інтегрується з вашою CRM</b><span>Швидко й безпечно — <em>CRM лишається джерелом правди</em></span></div>
 </div></section>
 
 <section id="end">

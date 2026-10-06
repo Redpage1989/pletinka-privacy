@@ -9,7 +9,7 @@ ENC=(-c:v libx264 -preset slow -crf 18 -pix_fmt yuv420p -r 30 -an)
 off() { node -p "require('./$W/rec/offsets.json').$1"; }
 
 # Сцена (0 — вступ, 1–8 — ролик): тривалість (с) і зсув голосу від початку сцени (с)
-DUR=(25.0 5.0 6.5 8.5 9.0 8.5 6.5 5.0 7.0)
+DUR=(25.0 5.0 6.5 8.5 9.0 8.5 6.5 5.0 14.0)
 VO=(0.5 0.6 0.4 0.4 0.3 0.5 0.4 0.8 0.5)
 
 # Кліпи Higgsfield. 1912×1080 → 1920×1080 (різниця 0,4 %). Сцени 2 і 6 сповільнено ×1.3 під довшу фразу.
@@ -33,8 +33,9 @@ screen 3 8.5; screen 4 9.0; screen 5 8.5
 ffmpeg -v error -y -loop 1 -i $W/gfx/intro.png -vf "fps=30,trim=duration=6,fade=in:d=0.6" "${ENC[@]}" $S/0a.mp4
 screen 0b 8.4; screen 0c 10.6
 
-# Кінцева заставка: проявляється й іде в чорне
-ffmpeg -v error -y -loop 1 -i $W/gfx/end.png -vf "fps=30,trim=duration=7,fade=in:d=0.5,fade=out:st=6:d=1" "${ENC[@]}" $S/8.mp4
+# Кінцева заставка: проявляється, блок «Для клінік: CRM» — під фразу про інтеграцію (3.7 с), наприкінці в чорне
+ffmpeg -v error -y -loop 1 -i $W/gfx/end.png -loop 1 -i $W/gfx/crm.png -filter_complex \
+  "[1:v]format=rgba,fade=in:st=3.7:d=0.6:alpha=1[c];[0:v][c]overlay=0:0,fps=30,trim=duration=14,fade=in:d=0.5,fade=out:st=13:d=1" "${ENC[@]}" $S/8.mp4
 
 printf "file '%s'\n" $PWD/$S/{0a,0b,0c,1,2,3,4,5,6,7,8}.mp4 > $S/list.txt
 ffmpeg -v error -y -f concat -safe 0 -i $S/list.txt -c copy $W/video-only.mp4
@@ -56,7 +57,7 @@ f=lambda s:'%02d:%02d:%02d,%03d'%(s//3600,s%3600//60,s%60,round(s%1*1000))
 n=0
 for row in open(sys.argv[1],encoding='utf-8'):
     st,ln,txt=row.rstrip('\n').split('|',2); st,ln=float(st),float(ln)
-    txt=txt.replace('Ай-Ем Клінік','IM Clinic').replace('Ай-Ем','IM')  # фонетика лише для синтезу
+    txt=txt.replace('Ай-Ем Клінік','IM Clinic').replace('Ай-Ем','IM').replace('сі-ар-ем','CRM')  # фонетика лише для синтезу
     parts=re.split(r'(?<=[.!?])\s+',txt.strip()); tot=sum(map(len,parts))
     for p in parts:
         d=ln*len(p)/tot; n+=1; print(f"{n}\n{f(st)} --> {f(st+d)}\n{p}\n"); st+=d
