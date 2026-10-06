@@ -14,6 +14,7 @@ await ctx.addInitScript(() => { try { localStorage.clear(); } catch {} });
 const p = await ctx.newPage();
 await p.goto(u('../prototype/index.html').href);
 await p.evaluate(() => document.fonts.ready);
+await p.addStyleTag({ content: '.demo-band{display:none!important}' }); // плашка «Демо» — лише в прототипі, не на мініатюрі
 await p.click('[data-tab="plan"]');
 await p.waitForTimeout(400);
 await p.screenshot({ path: fileURLToPath(u('./work/gfx/thumb-screen.png')) });
