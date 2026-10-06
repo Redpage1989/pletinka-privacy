@@ -6,13 +6,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Unbounded:wght@600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-/* Кадр 1920×1080. Режим — у hash: #bg3 #bg4 #bg5 (тло під телефоном), #frame (рамка поверх запису),
+/* Кадр 1920×1080. Режим — у hash: #intro (вступ), #bg0b #bg0c #bg3 #bg4 #bg5 (тло під телефоном), #frame (рамка поверх запису),
    #title (титр сцени 2, прозорий), #end (кінцева заставка). Рендерить make-assets.mjs. */
 :root{--signal:#1B4D9E;--soft:#E4EAF3;--ground:#F4F6F6;--ink:#14181A;--read:#4E5C63;--night:#0A151D;--paper:#EAF2F2;--amber:#FFB65C}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:1920px;height:1080px;background:transparent;font-family:Geologica,Arial,sans-serif;color:var(--ink)}
 section{display:none;width:1920px;height:1080px;position:relative;overflow:hidden}
-body[data-m^="bg"] #bg,body[data-m="frame"] #frame,body[data-m="title"] #title,body[data-m="end"] #end{display:block}
+body[data-m^="bg"] #bg,body[data-m="frame"] #frame,body[data-m="title"] #title,body[data-m="end"] #end,body[data-m="intro"] #intro{display:block}
 
 /* Тло екранних сцен: телефон зліва (екран 462×1000 від x=300,y=40), текст справа */
 #bg{background:radial-gradient(1200px 900px at 20% 30%,#fff 0,var(--soft) 55%,#d5deec 100%)}
@@ -44,6 +44,14 @@ body[data-m^="bg"] #bg,body[data-m="frame"] #frame,body[data-m="title"] #title,b
 #end p{margin-top:30px;font-size:40px;line-height:1.3;color:#B9CBD2;width:900px}
 #end .url{margin-top:54px;display:inline-block;font-size:44px;font-weight:600;color:var(--night);background:var(--amber);padding:14px 30px;border-radius:18px}
 #end .qr{position:absolute;right:170px;top:300px;background:#fff;padding:30px;border-radius:32px}
+#intro{background:radial-gradient(1100px 800px at 75% 20%,#12304f 0,var(--night) 60%);color:var(--paper)}
+#intro .l{position:absolute;left:150px;top:300px;width:1500px}
+#intro .mark{display:flex;align-items:center;gap:22px;margin-bottom:50px}
+#intro .mark img{width:110px;height:110px}
+#intro .mark span{font-family:Unbounded,Geologica,sans-serif;font-size:36px;font-weight:600;color:#8FA8B2}
+#intro h1{font-family:Unbounded,Geologica,sans-serif;font-size:150px;line-height:1;font-weight:700;letter-spacing:-.02em}
+#intro p{margin-top:36px;font-size:46px;line-height:1.3;color:#B9CBD2}
+#intro p b{color:var(--amber);font-weight:600}
 #end .qr small{display:block;text-align:center;margin-top:16px;font-size:24px;color:var(--night);font-weight:600}
 </style>
 </head>
@@ -57,6 +65,12 @@ body[data-m^="bg"] #bg,body[data-m="frame"] #frame,body[data-m="title"] #title,b
 
 <section id="title"><div class="chip"><img src="app-logo.png" alt=""><div><b>IM Clinic</b><span>Кабінет пацієнта вашої клініки</span></div></div></section>
 
+<section id="intro"><div class="l">
+  <div class="mark"><img src="im-logo.svg" alt="">im.pl.ua</div>
+  <h1>Вітаємо!</h1>
+  <p>Ми — <b>IM</b>, розробляємо програмне забезпечення.<br>Представляємо застосунок для пацієнтів вашої клініки.</p>
+</div></section>
+
 <section id="end">
   <div class="l">
     <div class="mark"><img src="im-logo.svg" alt="">im.pl.ua</div>
@@ -69,7 +83,9 @@ body[data-m^="bg"] #bg,body[data-m="frame"] #frame,body[data-m="title"] #title,b
 
 <script>
 var m=location.hash.slice(1)||"end";document.body.dataset.m=m;
-var T={bg3:["Онлайн-запис","Лікар, вільний час, підтвердження — без дзвінків на рецепцію"],
+var T={bg0b:["Застосунок<br>для пацієнтів<br>вашої клініки","Під вашим брендом. Встановлюється на телефон пацієнта"],
+       bg0c:["Завжди на<br>звʼязку з вами","Акції й персональні пропозиції — за згодою пацієнта. І він повертається саме до вас"],
+       bg3:["Онлайн-запис","Лікар, вільний час, підтвердження — без дзвінків на рецепцію"],
        bg4:["Нагадування<br>й памʼятки","Push за добу й за 2 години. Після процедури — що робити й коли дзвонити"],
        bg5:["План лікування","Етапи, суми й погодження плану — у телефоні"]};
 if(T[m]){document.getElementById("h").innerHTML=T[m][0];document.getElementById("s").textContent=T[m][1]}

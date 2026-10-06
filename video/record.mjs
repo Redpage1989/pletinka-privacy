@@ -49,6 +49,24 @@ async function scene(name, state, act) {
   renameSync(await v.path(), `${OUT}${name}.webm`);
 }
 
+// Вступ 0b: застосунок клініки — головна, повільний скрол, вкладка «Клініка»
+await scene('scene0b', BOOKED, async ({ p, w, tap, scroll }) => {
+  await w(2200); await scroll('.quick', 2200);
+  await tap('#tabs [data-tab="clinic"]'); await w(3500);
+});
+
+// Вступ 0c: пуш персональної пропозиції (за згодою) → бали й запрошення
+await scene('scene0c', BOOKED, async ({ p, w, tap }) => {
+  await w(1500);
+  await p.evaluate(() => { // текст — як у картці «Пропозиція для вас» живого демо
+    document.getElementById('push-title').textContent = 'Пропозиція для вас';
+    document.getElementById('push-text').textContent = 'Минув рік — у клініці для вас персональна пропозиція. Умови — на рецепції.';
+    document.getElementById('push').classList.add('show');
+  });
+  await w(3800); await p.evaluate(() => document.getElementById('push').classList.remove('show'));
+  await w(700); await tap('#app [data-go="loyalty"]'); await w(4500);
+});
+
 // Сцена 3: запис на прийом за три кроки
 await scene('scene3', null, async ({ p, w, tap }) => {
   await w(1200); await tap('#app [data-go="book"]');
