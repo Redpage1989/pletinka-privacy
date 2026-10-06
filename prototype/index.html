@@ -275,7 +275,7 @@ nav.tabs button.on{color:var(--signal);font-weight:600}
   function plan(){
     var h='<div class="pad"><h1>План лікування</h1><p class="sub">Литвиненко Марія Олександрівна</p>';
     h+='<div class="card"><h3 style="margin-top:0">Залишок до сплати</h3><div class="big tab">40 650 <small style="font-size:18px">₴</small></div><p class="muted" style="margin-top:6px">Сплачено <b class="tab">9 000</b> з <span class="tab">49 650</span> ₴</p>';
-    h+='<div class="segbar">'+new Array(21).join("x").split("").map(function(_,i){return '<i class="'+(i<4?'on':'')+'"></i>'}).join("")+'</div><div class="row muted" style="font-size:11px;letter-spacing:.1em"><span class="grow">ВИКОНАНО 18 %</span><span>ЕТАП 2 З 4</span></div></div>';
+    h+='<div class="segbar">'+new Array(21).join("x").split("").map(function(_,i){return '<i class="'+(i<4?'on':'')+'"></i>'}).join("")+'</div><div class="row muted" style="font-size:11px;letter-spacing:.1em"><span class="grow">ВИКОНАНО 18 %</span><span>ЕТАП 2 з 4</span></div></div>';
     h+='<h3>Зубна формула</h3><div class="film">';
     [UPPER,LOWER].forEach(function(row){h+='<div class="jaw">';row.forEach(function(n){h+='<div class="t '+(TEETH[n]||"")+'" title="Зуб '+n+'">'+n+'</div>'});h+='</div>'});
     h+='</div><div class="legend"><span>┅ Заплановано <b>3</b></span><span>■ Проліковано <b>3</b></span><span>▫ Відсутній <b>3</b></span><span>□ Здоровий <b>23</b></span></div>';
