@@ -20,7 +20,7 @@
 | 1 | 0:25–0:31 | HIGGS `pain`: у Анни зранку болить зуб | «Зранку заболів зуб. Анна йде туди, де їй допоможуть, — у клініку.» | — |
 | 2 | 0:31–0:36 | HIGGS `reception`: рецепція записує Анну до лікаря | «На рецепції Анну одразу записують до лікаря.» | — |
 | 3 | 0:36–0:40 | HIGGS `relief`: лікар знімає біль | «Лікар знімає біль. Найважче — позаду.» | — |
-| 4 | 0:40–0:47 | HIGGS `qr`: **після процедури** Анна сканує телефоном QR-код на стійці рецепції | «Після процедури Анна сканує QR-код на рецепції — і застосунок клініки вже в її телефоні.» | IM Clinic · кабінет пацієнта вашої клініки |
+| 4 | 0:40–0:47 | HIGGS `qr`: **після процедури** адміністраторка показує QR-код на планшеті, Анна сканує його телефоном | «Після процедури Анна сканує QR-код на рецепції — і застосунок клініки вже в її телефоні.» | IM Clinic · кабінет пацієнта вашої клініки |
 | 5 | 0:47–0:58 | ЗАПИС ЕКРАНА `tour`: вітання клініки й PIN → Головна з візитом і пушем «Завтра візит» → Лікування → Догляд → Клініка | «Тут усе: візит і нагадування, план лікування, памʼятки, гарантії і контакти клініки.» | Усе — в одному застосунку |
 | 6 | 0:58–1:05 | ЗАПИС ЕКРАНА `memo`: памʼятка з галочками → «коли дзвонити терміново» | «А вдома — памʼятка після процедури…» | Памʼятка після процедури |
 | 7 | 1:05–1:12 | ЗАПИС ЕКРАНА `plan`: залишок → зубна формула → етапи → «що буде, якщо чекати» → «Погодити план» | «Далі — план лікування з етапами й сумами. Погодити його можна просто в телефоні.» | План лікування |
@@ -41,8 +41,8 @@
 
 **Кадр 2:** `Same woman looks at the phone screen and smiles with relief, subtle head movement, shallow depth of field, phone screen not visible to camera, slow dolly in`
 
-**Кадр QR (`clips/qr.mp4`, сцена 4):** `Same woman stands at the reception desk of a bright modern dental clinic right after her treatment, relieved and smiling, holds up her smartphone and scans a QR code on a small white table stand on the counter, over-the-shoulder medium close-up of the phone pointed at the stand, friendly receptionist smiling in soft focus behind the desk, clean white and deep blue (#1B4D9E) interior, soft daylight, photorealistic, 16:9`
-Уникати: читабельного тексту й логотипів на стійці та екрані телефона. Сам застосунок у ролику показує запис екрана (сцена 5).
+**Кадр QR (`clips/qr.mp4`, сцена 4):** `Same woman stands at the reception desk of a bright modern dental clinic right after her treatment, relieved and smiling; a friendly receptionist holds up a tablet toward her showing a large QR code, and she points her smartphone at the tablet screen to scan it; over-the-shoulder medium close-up of the phone and the tablet, receptionist smiling, clean white and deep blue interior, soft daylight, cinematic shallow depth of field, photorealistic, no readable text, no logos`
+QR показує адміністраторка **на планшеті** (не табличка на стійці). Уникати читабельного тексту й логотипів на планшеті та екрані телефона. Сам застосунок у ролику показує запис екрана (сцена 5).
 
 **Кадр 6:** `Friendly female dentist in white coat shows a tablet to a smiling patient in a modern dental office, over-the-shoulder shot, gentle camera move, tablet screen out of focus`
 
