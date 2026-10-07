@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 # GIF-прев'ю промо для листів (im-outreach: products/im-clinic.yaml → animated:) → work/clinic-promo.gif
-# 5,2 с ключових моментів (QR на планшеті → застосунок з пушем → усмішка) з кнопкою ▶, 360×203, 5 fps,
+# 5,2 с ключових моментів (QR на планшеті → застосунок з пушем → усмішка) з кнопкою ▶ у правому нижньому куті, 360×203, 5 fps,
 # ≤ 290 КБ: лист разом з картинками ~480 КБ. Gmail і Apple Mail грають GIF, Outlook показує 1-й кадр.
 set -euo pipefail
 cd "$(dirname "$0")"
 python3 - <<'PY'
 from PIL import Image, ImageDraw
 W, H = 360, 203; im = Image.new('RGBA', (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
-r, cx, cy = 25, W // 2, H // 2
+r = 22; cx, cy = W - r - 14, H - r - 14  # ▶ у правому нижньому куті: по центру закривала QR, заголовок і усмішку Анни
 d.ellipse((cx - r - 2, cy - r - 2, cx + r + 2, cy + r + 2), fill=(255, 255, 255, 90))
 d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=(10, 102, 221, 235))
-d.polygon([(cx - 8, cy - 12), (cx - 8, cy + 12), (cx + 14, cy)], fill=(255, 255, 255, 255))
+d.polygon([(cx - 7, cy - 11), (cx - 7, cy + 11), (cx + 12, cy)], fill=(255, 255, 255, 255))
 im.save('work/play360.png')
 PY
 # Таймкоди — під монтаж 98 с (build.sh): QR на планшеті з плашкою IM Clinic (сцена 4: 40,5–47,5 с) →
