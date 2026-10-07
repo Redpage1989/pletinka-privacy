@@ -1,4 +1,4 @@
-// Запис екранних сцен 3–5 з prototype/index.html#rec → work/rec/scene{3,4,5}.webm
+// Запис екранних сцен з prototype/index.html#rec → work/rec/*.webm (scene0b, scene0c, tour, memo, plan)
 // Вʼюпорт 780×1688 при zoom 2 = телефон 390×844 у 2× — чіткий кадр без апскейлу.
 // Запуск: node record.mjs   (playwright — через node_modules-симлінк)
 import { chromium } from 'playwright';
@@ -30,10 +30,11 @@ const TAP = () => {
 const b = await chromium.launch();
 const offsets = {};
 
-async function scene(name, state, act) {
+async function scene(name, state, act, init) {
   const ctx = await b.newContext({ viewport: SIZE, recordVideo: { dir: OUT, size: SIZE } });
   const t0 = Date.now();
   await ctx.addInitScript(TAP);
+  if (init) await ctx.addInitScript(init); // напр. екран вітання — ще до першого кадру, щоб під ним не просвічувала головна
   await ctx.addInitScript(s => { try { s ? localStorage.setItem('im-clinic-proto', JSON.stringify(s)) : localStorage.clear(); } catch {} }, state);
   const p = await ctx.newPage();
   await p.goto(URL); await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(300);
@@ -67,12 +68,27 @@ await scene('scene0c', BOOKED, async ({ p, w, tap }) => {
   await w(700); await tap('#app [data-go="loyalty"]'); await w(4500);
 });
 
-// CJM 3: після рецепції — візит уже в застосунку, пуш «Завтра візит»
-await scene('visit', BOOKED, async ({ p, w }) => {
-  await w(2500); await p.keyboard.press('n'); await w(5000);
+// CJM 5: після процедури Анна відсканувала QR на рецепції → застосунок клініки відкривається:
+// вітання й PIN (як у живому вході: посилання від рецепції + PIN) → головна з пушем «Завтра візит» → огляд вкладок
+const WELCOME = () => addEventListener('DOMContentLoaded', () => {
+  const o = document.createElement('div'); o.id = 'welcome';
+  o.style.cssText = 'position:absolute;inset:0;z-index:20;background:var(--ground,#F4F6F6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-family:inherit;transition:opacity .45s';
+  o.innerHTML = '<img src="logo.png" style="width:84px;height:84px;border-radius:22px;margin-bottom:10px">'
+    + '<b style="font-size:24px">IM Dental Demo</b><span style="color:#5E6D74;font-size:15px">Кабінет пацієнта</span>'
+    + '<span style="margin-top:28px;font-size:16px;font-weight:600">Придумайте PIN-код</span>'
+    + '<div id="pin" style="display:flex;gap:16px;margin-top:6px">' + '<i style="width:16px;height:16px;border-radius:50%;border:2px solid #1B4D9E;display:block;transition:background .15s"></i>'.repeat(4) + '</div>';
+  document.querySelector('.phone').appendChild(o);
 });
+await scene('tour', BOOKED, async ({ p, w, tap }) => {
+  await w(900);
+  for (let i = 0; i < 4; i++) { await p.evaluate(n => { document.querySelectorAll('#pin i')[n].style.background = '#1B4D9E'; }, i); await w(230); }
+  await w(350); await p.evaluate(() => { const o = document.getElementById('welcome'); o.style.opacity = '0'; setTimeout(() => o.remove(), 450); });
+  await w(1200); await p.keyboard.press('n'); await w(2600);
+  await p.evaluate(() => document.getElementById('push').classList.remove('show')); await w(500);
+  for (const t of ['plan', 'care', 'clinic']) { await tap(`#tabs [data-tab="${t}"]`); await w(1500); }
+}, WELCOME);
 
-// CJM 5: вдома — памʼятка з галочками → «коли дзвонити терміново»
+// CJM 6: вдома — памʼятка з галочками → «коли дзвонити терміново»
 await scene('memo', BOOKED, async ({ p, w, tap, scroll }) => {
   await w(600); await tap('#tabs [data-tab="care"]');
   await w(1400); await tap('[data-memo="5"]');
@@ -80,7 +96,7 @@ await scene('memo', BOOKED, async ({ p, w, tap, scroll }) => {
   await w(1200);
 });
 
-// CJM 6: Лікування → формула → етапи → погодження плану
+// CJM 7: Лікування → формула → етапи → погодження плану
 await scene('plan', BOOKED, async ({ p, w, tap, scroll }) => {
   await w(600); await tap('#tabs [data-tab="plan"]');
   await w(1600); await scroll('.film', 1300);
