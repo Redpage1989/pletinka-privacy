@@ -30,8 +30,9 @@ c = int(sys.argv[1]); p = Image.open('work/pal.png').convert('RGB')  # 16×16, �
 for i, rgb in ((c - 2, (10, 102, 221)), (c - 1, (255, 255, 255))): p.putpixel((i % 16, i // 16), rgb)
 p.save('work/pal.png')
 PY2
-  ffmpeg -v error -y -i work/im-clinic-promo.mp4 -loop 1 -i work/play360.png -i work/pal.png -filter_complex \
-    "$F[x];[x][2:v]paletteuse=dither=none:diff_mode=rectangle" -loop 0 work/clinic-promo.gif
+  # Палітра з -loop 1 (одиночний кадр у ffmpeg 9 валить paletteuse «Internal bug»), тому кадрів рівно (2,0+1,8+1,4)·5 = 26
+  ffmpeg -v error -y -i work/im-clinic-promo.mp4 -loop 1 -i work/play360.png -loop 1 -i work/pal.png -filter_complex \
+    "$F[x];[x][2:v]paletteuse=dither=none:diff_mode=rectangle" -frames:v 26 -loop 0 work/clinic-promo.gif
   [ "$(wc -c < work/clinic-promo.gif)" -le 296960 ] && break
 done
 echo "кольорів: $C"; ls -la work/clinic-promo.gif
