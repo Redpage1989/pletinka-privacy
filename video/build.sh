@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Монтаж промо IM Clinic → work/im-clinic-promo.mp4 (1920×1080, 30 fps, озвучка ≈ −16 LUFS, пік −1.5 dBFS; ціль loudnorm завищена, бо паузи між фразами тягнуть середнє вниз) + .srt
-# Вхід: clips/{pain,reception,relief,qr,scene6,scene7}.mp4 (Higgsfield/Kling), work/rec/*.webm (node record.mjs),
+# Вхід: clips/{pain,scene1,relief,qr,scene6,scene7}.mp4 (Higgsfield/Kling), work/rec/*.webm (node record.mjs),
 #       work/gfx/*.png (node make-assets.mjs), work/vo/00…10.mp3 (elevenlabs-tts --scenes; 00 — вступ, 10 — заставка).
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -18,7 +18,7 @@ VO=(0.5 0.6 0.4 0.5 0.6 0.4 0.4 0.6 0.6 0.6 0.5)
 clip() { # in out dur slow
   ffmpeg -v error -y -i "$1" -filter_complex "[0:v]setpts=$4*PTS,scale=1920:1080,fps=30,trim=duration=$3" "${ENC[@]}" "$2"; }
 clip clips/pain.mp4      $S/1.mp4 6.0 1.2
-clip clips/reception.mp4 $S/2.mp4 5.0 1
+clip clips/scene1.mp4    $S/2.mp4 5.0 1  # Анна з телефоном удома: у reception.mp4 вона вже сканує QR, а QR — лише після лікування (сцена 4)
 clip clips/relief.mp4    $S/3.mp4 4.5 1
 # Після процедури: Анна сканує QR на рецепції + плашка «IM Clinic · кабінет пацієнта вашої клініки»
 ffmpeg -v error -y -i clips/qr.mp4 -loop 1 -i $W/gfx/title.png -filter_complex \
