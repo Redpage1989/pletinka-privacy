@@ -23,7 +23,7 @@
 | 4 | 0:45–0:54 | ЗАПИС ЕКРАНА: пуш «Завтра візит» (клавіша N) → вкладка «Догляд»: памʼятка після видалення, кроки з галочками, червоний блок «коли дзвонити терміново» | «Нагадаємо про візит за добу й за дві години. А після процедури — памʼятка: що робити й коли дзвонити терміново.» | Нагадування й памʼятки |
 | 5 | 0:54–1:02 | ЗАПИС ЕКРАНА: «Лікування»: залишок 40 650 ₴ → зубна формула → етапи з цінами → «що буде, якщо чекати» → розстрочка → «Погодити план» | «План лікування з етапами й сумами — і погодити його можна просто в телефоні.» | План лікування |
 | 6 | 1:02–1:09 | HIGGS: лікар у кабінеті показує пацієнтці план лікування на планшеті | «Лікар пояснює план своїми словами, а він лишається у вас — з етапами й цінами.» | — |
-| 7 | 1:09–1:14 | HIGGS: Анна виходить з клініки, усміхнена, на вулиці | «Піклуйтеся про посмішку зручно.» | — |
+| 7 | 1:09–1:14 | HIGGS: Анна виходить з клініки й широко, щасливо усміхається в камеру (видно зуби) | «Піклуйтеся про посмішку зручно.» | — |
 | 8 | 1:14–1:28 | Знак IM + «IM Clinic» на тлі `#0A151D`, QR на im.pl.ua/clinic | «Попросіть посилання на рецепції своєї клініки. А для клінік: адміністративна частина інтегрується з вашою CRM — швидко й безпечно. Посилання — в описі.» (блок «Для клінік: CRM» з 3,7 с) | im.pl.ua/clinic |
 
 Функції в кадрах 3–5 звірено з кодом застосунку (PureApp) і уроком `clinic.mp4`. Не обіцяти: онлайн-оплату, чат, знімки в застосунку, App Store / Google Play (це PWA, ставиться з браузера).
@@ -41,7 +41,8 @@
 
 **Кадр 6:** `Friendly female dentist in white coat shows a tablet to a smiling patient in a modern dental office, over-the-shoulder shot, gentle camera move, tablet screen out of focus`
 
-**Кадр 7:** `Same woman walks out of a modern clinic entrance into a sunny street, confident natural smile, light breeze in hair, tracking shot from the front, photorealistic`
+**Кадр 7 (`clips/scene7.mp4`, фінал):** `Same woman walks out of a modern clinic entrance into a sunny street, turns to the camera and breaks into a wide, genuinely happy smile showing healthy natural white teeth, eyes crinkling with joy, relaxed shoulders, light breeze in hair, medium close-up so the smile is clearly visible, slow tracking shot from the front, warm daylight, photorealistic`
+Вимога до дубля: щаслива усмішка з видимими зубами тримається щонайменше останні 2–3 с кліпу. Зуби природні й здорові, не «голлівудські». Згенерувати 3–4 варіанти й обрати той, де усмішка найщиріша.
 
 Негатив/уникати: текст на екранах, логотипи, зуби крупним планом із дефектами, надмірно «ідеальні» голлівудські зуби.
 
